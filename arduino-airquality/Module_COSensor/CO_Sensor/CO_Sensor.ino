@@ -1,39 +1,41 @@
-/*
- Module using an Arduino Fio and a MQ-7 on Parallax Gas Sensor Module.
- A seperate power source is used as the Fio cannot source enough current 
- for the MQ-7 module.
- 
- Blog: http://arduinodev.woofex.net/
- Code: https://github.com/Trefex/arduino-airquality/
-
- For Pin connections, please check the Blog or the github project page
- Authors: Cyrille Médard de Chardon (serialC), Christophe Trefois (Trefex)
- Changelog:
-   2013-Dec-22: First correctly working version with codebase
-   2014-Jan-04: Updated existing library to facilitate usage
-
- This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License. 
- To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter 
- to Creative Commons, 444 Castro Street, Suite 900, Mountain View, California, 94041, USA. 
- */
-
 #include "COS_MQ7.h"
 
 // Pin definitions
-#define ACTIVE_MONOX_LED_PIN 13
-#define ACTIVE_MONOX_PIN 11
-#define READ_MONOX_PIN A7
-#define READ_COPSV_PIN A1
+#define ACTIVE_MONOX_PIN 5
+#define READ_MONOX_PIN A4
+#define READ_COPSV_PIN A3
 
 // Variable initializations
 int reading, voltage;
-
+int heater = 6;
+int sense = 4;
 // create CO sensor object
 // Last parameter is the duration of initial purge in seconds, negative value sets to default 500 seconds
 COS_MQ7 MQ7(ACTIVE_MONOX_LED_PIN, ACTIVE_MONOX_PIN, READ_MONOX_PIN, READ_COPSV_PIN, -1);
 
 void setup() {
   Serial.begin(9600);
+  /*pinMode(heater, OUTPUT);
+  pinMode(sense, INPUT);
+  digitalWrite(heater, HIGH);        // Heater on
+  Serial.println("Purge started...");
+  for(int i = 60; i > 0; i--) {         // Purge for 60 seconds
+    Serial.println(i);
+    delay(1000);
+  }
+   Serial.println("Purge completed...");
+
+  Serial.println("Sensing...");
+
+  for(int i = 0; i <= 90; i++) {     // Read for 90 seconds
+    Serial.print(i, DEC);                   //  This code may be repeated
+    if(digitalRead(sense) == 1)
+      Serial.print("  ALARM");
+    Serial.println("");
+    delay(1000);
+  }
+  Serial.println("Sense complete...");
+  */
 }
 
 void loop() {
